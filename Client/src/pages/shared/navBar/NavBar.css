@@ -1,0 +1,124 @@
+/* NavBar.css — Flexbox, desktop-first */
+
+/* ===== Base (Desktop) ===== */
+.navInner {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;                /* center the bar */
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: nowrap;             /* no wrap on desktop */
+  box-sizing: border-box;
+}
+
+/* sections */
+.left,
+.center,
+.right {
+  display: flex;
+  align-items: center;
+  min-width: 0;                  /* CRITICAL: allow flex items to shrink */
+}
+
+/* Center (search) grows but caps on desktop */
+.center {
+  flex: 1 1 560px;               /* grow, shrink, basis */
+  max-width: 560px;
+  justify-content: center;
+}
+
+/* Right side: align to the end, use gap; remove useless justify-self */
+.right {
+  flex: 0 1 auto;
+  justify-content: flex-end;
+  gap: 24px;
+}
+
+/* Make whatever is inside .center (e.g., search input) actually shrink */
+.center > * {
+  flex: 1 1 auto;
+  min-width: 0;
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Brand */
+.brand {
+  font-weight: 700;
+  text-decoration: none;
+  letter-spacing: 0.3px;
+  font-size: 1.1rem;
+  opacity: 0.95;
+}
+
+/* Buttons */
+.btn {
+  appearance: none;
+  border: none;
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 120ms ease, filter 120ms ease, background-color 120ms ease;
+  will-change: transform, filter;
+}
+.btn:hover { transform: translateY(-1px); filter: brightness(1.02); }
+.btn:active { transform: translateY(0); }
+
+.btn.ghost {
+  background: transparent;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  padding: 7px 13px;
+  text-decoration: none;
+}
+
+/* Avatar */
+.avatarWrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  outline: none;
+}
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+}
+
+/* ===== Responsive ===== */
+
+/* Tighten center and spacing as viewport shrinks */
+@media (max-width: 1200px) {
+  .center { flex-basis: 520px; max-width: 520px; }
+}
+@media (max-width: 1024px) {
+  .navInner { gap: 12px; }
+  .center { flex-basis: 420px; max-width: 420px; }
+  .right { gap: 16px; }
+}
+
+/* Let the center keep existing but narrower before finally hiding */
+@media (max-width: 860px) {
+  .center { flex-basis: 360px; max-width: 360px; }
+}
+
+/* Small screens: hide search, shrink controls */
+@media (max-width: 720px) {
+  .center { display: none; }
+  .navInner { gap: 10px; }
+  .btn { padding: 7px 12px; font-size: 0.95rem; }
+  .avatar { width: 36px; height: 36px; }
+}
+
+/* Ultra-small: tighter right spacing */
+@media (max-width: 420px) {
+  .right { gap: 8px; }
+}

@@ -1,0 +1,118 @@
+/* Entire row: left/right alignment */
+.message-row {
+  width: 100%;
+  display: flex;
+  margin-bottom: 4px;
+}
+
+.message-row--own {
+  justify-content: flex-end;
+}
+
+.message-row--other {
+  justify-content: flex-start;
+}
+
+/* Bubble style */
+.message-bubble {
+  position: relative;
+  max-width: 70%;
+  padding: 8px 10px 4px;
+  border-radius: 12px;
+  font-size: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+  animation: messageIn 0.18s ease-out;
+}
+
+/* Own vs other colors (WhatsApp-ish) */
+.message-bubble--own {
+  background-color: #4a4a64;
+  color: #ffffff;
+  border-bottom-right-radius: 2px;
+}
+
+.message-bubble--other {
+  background-color: #d1cfd9;
+  color: #000000;
+  border-bottom-left-radius: 2px;
+}
+
+/* Tail */
+.message-tail {
+  position: absolute;
+  bottom: 0;
+  width: 8px;
+  height: 8px;
+}
+
+.message-tail--own {
+  right: -4px;
+  background-color: #4a4a64;
+  clip-path: polygon(0 0, 100% 0, 0 100%);
+}
+
+.message-tail--other {
+  left: -4px;
+  background-color: #d1cfd9;
+  clip-path: polygon(0 0, 100% 0, 100% 100%);
+}
+
+/* Text */
+.message-text {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+/* Time + status row */
+.message-meta {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  opacity: 0.85;
+}
+
+.message-time {
+  font-size: 10px;
+}
+
+/* Read indicator */
+.message-status {
+  display: flex;
+  align-items: center;
+}
+
+.message-status--read svg {
+  fill: #53bdeb; /* WhatsApp blue-ish for 'read' */
+}
+
+/* Date separators (Today / Yesterday / dd MMM yyyy) */
+.messages-date-separator {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0;
+  font-size: 11px;
+  color: #b0b0b0;
+}
+
+.messages-date-separator span {
+  padding: 3px 10px;
+  border-radius: 999px;
+  background-color: rgba(0, 0, 0, 0.25);
+}
+
+/* Subtle message appear animation */
+@keyframes messageIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
